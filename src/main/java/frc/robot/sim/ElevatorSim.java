@@ -26,7 +26,7 @@ public class ElevatorSim {
 
     public ElevatorSim(CANSparkMax motor) {
         NetworkTable rootTable = NetworkTableInstance.getDefault().getTable("SimDebug").getSubTable("Elevator");
-        MotorShaft motorShaft = new MotorShaft(RobotMap.NEO_ENCODER_PPR, SimSettings.ELEVATOR_MOTOR_TO_ELEVATOR_GEAR_RATIO, SimSettings.ELEVATOR_DRUM_RADIUS_M);
+        MotorShaft motorShaft = new MotorShaft(RobotMap.NEO_ENCODER_PPR, SimSettings.ELEVATOR_MOTOR_TO_ELEVATOR_GEAR_RATIO, 2 * SimSettings.ELEVATOR_DRUM_RADIUS_M * Math.PI);
 
         this.motor = new SparkMaxSim(
                 rootTable,
