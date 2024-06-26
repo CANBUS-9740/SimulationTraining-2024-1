@@ -24,7 +24,7 @@ public class MoveElevatorToHeight extends Command {
     }
 
     public void end(boolean interrupted) {
-
+        elevatorSystem.stop();
     }
 
     public boolean isFinished() {
