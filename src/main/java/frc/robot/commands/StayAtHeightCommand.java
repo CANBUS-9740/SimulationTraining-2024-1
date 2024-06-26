@@ -21,7 +21,7 @@ public class StayAtHeightCommand extends Command {
 
     @Override
     public void execute() {
-        double speed = ((targetHeight - sub.getHeight()) / targetHeight) * 0.5;
+        double speed = ((targetHeight - sub.getHeight()) / (RobotMap.ELEVATOR_MAX_HEIGHT - RobotMap.ELEVATOR_MIN_HEIGHT));
         sub.move(speed + RobotMap.ELEVATOR_STATIC_POW);
     }
 
