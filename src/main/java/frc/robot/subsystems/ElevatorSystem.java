@@ -17,12 +17,14 @@ public class ElevatorSystem extends SubsystemBase {
     private DigitalInput switchMin;
 
     public ElevatorSystem() {
-        sim = new ElevatorSim(sparkMax);
+
 
         sparkMax = new CANSparkMax(RobotMap.ELEVATOR_MOTOR, CANSparkLowLevel.MotorType.kBrushless);
         encoder = sparkMax.getAlternateEncoder(RobotMap.NEO_ENCODER_PPR);
         switchMax = new DigitalInput(RobotMap.ELEVATOR_TOP_SWITCH);
         switchMin = new DigitalInput(RobotMap.ELEVATOR_BOTTOM_SWITCH);
+
+        sim = new ElevatorSim(sparkMax);
     }
 
     public void move(double speed) {
