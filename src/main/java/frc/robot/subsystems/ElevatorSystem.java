@@ -57,6 +57,7 @@ public class ElevatorSystem extends SubsystemBase {
         SmartDashboard.putNumber("getHeight", getHeight());
         SmartDashboard.putBoolean("getTopSwitch", getTopSwitch());
         SmartDashboard.putBoolean("getBottomSwitch", getBottomSwitch());
+        SmartDashboard.putNumber("outPut", sparkMax.get());
 
         sim.update();
     }
