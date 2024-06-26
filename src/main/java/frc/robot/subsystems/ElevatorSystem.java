@@ -54,9 +54,9 @@ public class ElevatorSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.getNumber("getHeight", getHeight());
-        SmartDashboard.getBoolean("getTopSwitch", getTopSwitch());
-        SmartDashboard.getBoolean("getBottomSwitch", getBottomSwitch());
+        SmartDashboard.putNumber("getHeight", getHeight());
+        SmartDashboard.putBoolean("getTopSwitch", getTopSwitch());
+        SmartDashboard.putBoolean("getBottomSwitch", getBottomSwitch());
 
         sim.update();
     }
