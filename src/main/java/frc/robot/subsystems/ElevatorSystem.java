@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.sim.ElevatorSim;
@@ -53,6 +54,10 @@ public class ElevatorSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        SmartDashboard.getNumber("getHeight", getHeight());
+        SmartDashboard.getBoolean("getTopSwitch", getTopSwitch());
+        SmartDashboard.getBoolean("getBottomSwitch", getBottomSwitch());
+
         sim.update();
     }
 }
