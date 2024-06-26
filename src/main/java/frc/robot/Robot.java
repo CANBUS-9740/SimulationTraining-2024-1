@@ -43,10 +43,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        SequentialCommandGroup sequentialCommandGroup = new SequentialCommandGroup(
-                moveToHeightCommand,
-                stayAtHeightCommand
-                );
+        moveToHeightCommand.andThen
+                (stayAtHeightCommand).schedule();
     }
 
     @Override
