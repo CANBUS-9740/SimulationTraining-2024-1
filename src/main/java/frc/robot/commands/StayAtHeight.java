@@ -5,19 +5,17 @@ import frc.robot.subsystems.ElevatorSystem;
 
 public class StayAtHeight extends Command {
     private ElevatorSystem elevatorSystem;
-    private double startHeight;
     private double targetHeight;
 
-    public StayAtHeight(ElevatorSystem elevatorSystem, double startHeight, double targetHeight){
+    public StayAtHeight(ElevatorSystem elevatorSystem){
         this.elevatorSystem = elevatorSystem;
-        this.startHeight = startHeight;
-        this.targetHeight = targetHeight;
+
 
         addRequirements(elevatorSystem);
     }
 
     public void initialize() {
-        startHeight = elevatorSystem.getHeight();
+        targetHeight = elevatorSystem.getHeight();
     }
 
     public void execute() {
