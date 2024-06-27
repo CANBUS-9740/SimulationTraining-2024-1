@@ -11,62 +11,68 @@ import frc.robot.RobotMap;
 import frc.robot.sim.TurretSim;
 
 public class TurretSystem extends SubsystemBase {
+    private final CANSparkMax turretMotor;
+    private final RelativeEncoder turretMotorEncoder;
 
-    private final CANSparkMax motor;
-    private final RelativeEncoder encoder;
-    private final DigitalInput leftSwitch;
-    private final DigitalInput rightSwitch;
-    private final DigitalInput centerSwitch;
+    private final DigitalInput leftLimitSwitch;
+    private final DigitalInput rightLimitSwitch;
+    private final DigitalInput centerLimitSwitch;
 
     private final TurretSim sim;
 
     public TurretSystem() {
-        motor = new CANSparkMax(RobotMap.TURRET_MOTOR, CANSparkLowLevel.MotorType.kBrushless);
-        encoder = motor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, RobotMap.NEO_ENCODER_PPR);
+        turretMotor = new CANSparkMax(RobotMap.TURRET_MOTOR, CANSparkLowLevel.MotorType.kBrushless);
+        turretMotorEncoder = turretMotor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, RobotMap.NEO_ENCODER_PPR);
 
-        leftSwitch = new DigitalInput(RobotMap.TURRET_LEFT_SWITCH);
-        rightSwitch = new DigitalInput(RobotMap.TURRET_RIGHT_SWITCH);
-        centerSwitch = new DigitalInput(RobotMap.TURRET_CENTER_SWITCH);
+        leftLimitSwitch = new DigitalInput(RobotMap.TURRET_LEFT_SWITCH);
+        rightLimitSwitch = new DigitalInput(RobotMap.TURRET_RIGHT_SWITCH);
+        centerLimitSwitch = new DigitalInput(RobotMap.TURRET_CENTER_SWITCH);
 
-        sim = new TurretSim(motor);
+        sim = new TurretSim(turretMotor);
     }
 
-    public double getAngleDegrees() {
-        return encoder.getPosition() / RobotMap.TURRET_GEAR_RATIO * 360;
+    public double getTurretAngle() {
+        return turretMotorEncoder.getPosition() / RobotMap.TURRET_GEAR_RATIO * 360;
     }
 
-    public boolean isAtLeft() {
-        return !leftSwitch.get();
+    public boolean getLeftLimitSwitchValue() {
+        return !leftLimitSwitch.get();
     }
 
-    public boolean isAtRight() {
-        return !rightSwitch.get();
+    public boolean getRightLimitSwitchValue() {
+        return !rightLimitSwitch.get();
     }
 
-    public boolean isAtCenter() {
-        return !centerSwitch.get();
+    public boolean getCenterLimitSwitchValue() {
+        return !centerLimitSwitch.get();
     }
 
-    public void rotate(double speed) {
-        if ((isAtRight() && speed > 0) || (isAtLeft() && speed < 0)) {
-            stop();
-        } else {
-            motor.set(speed);
-        }
+    public void moveTurret(double turretSpeed) {
+        // Positive speed - up
+        // Negative speed - down
+
+        if ((getRightLimitSwitchValue() && turretSpeed > 0) || (getLeftLimitSwitchValue() && turretSpeed < 0))
+            turretMotor.stopMotor();
+        else
+            turretMotor.set(turretSpeed);
     }
 
-    public void stop() {
-        motor.stopMotor();
+    public void stopTurret() {
+        turretMotor.stopMotor();
+    }
+
+    public void resetTurretMotorEncoder() {
+        turretMotorEncoder.setPosition(0);
     }
 
     @Override
     public void periodic() {
-        sim.update();
+        SmartDashboard.putNumber("Turret Angle", getTurretAngle());
 
-        SmartDashboard.putNumber("TurretAngle", getAngleDegrees());
-        SmartDashboard.putNumber("TurretMotorRotations", encoder.getPosition());
-        SmartDashboard.putBoolean("TurretLeftSwitch", isAtLeft());
-        SmartDashboard.putBoolean("TurretRightSwitch", isAtRight());
-        SmartDashboard.putBoolean("TurretCenterSwitch", isAtCenter());
+        SmartDashboard.putBoolean("Left LS", getLeftLimitSwitchValue());
+        SmartDashboard.putBoolean("Center LS", getCenterLimitSwitchValue());
+        SmartDashboard.putBoolean("Right LS", getRightLimitSwitchValue());
+
+        sim.update();
     }
 }
