@@ -22,7 +22,7 @@ public class RotateByDegreesCommand extends Command {
 
     @Override
     public void execute() {
-        double output = targetAngle - sub.getYaw() * 0.5;
+        double output = (targetAngle - sub.getYaw()) * 0.1;
 
         if (targetAngle - sub.getYaw() < 180) {
             sub.move(-output, output);

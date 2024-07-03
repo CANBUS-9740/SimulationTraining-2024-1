@@ -23,7 +23,8 @@ public class DriveDistanceCommand extends Command {
     @Override
     public void execute() {
         double encoderAverage = (sub.getEncoderL() + sub.getEncoderR()) / 2;
-        double output = (targetPosition - encoderAverage) / (2 * targetPosition);
+
+        double output = (targetPosition - encoderAverage) / (2.5 * targetPosition);
 
         sub.move(output, output);
     }
