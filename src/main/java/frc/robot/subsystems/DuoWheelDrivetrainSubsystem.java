@@ -55,7 +55,7 @@ public class DuoWheelDrivetrainSubsystem extends SubsystemBase {
 
     public double getRightMoved(){
         double Circumference = Math.PI * 2* RobotMap.DRIVE_WHEEL_RADIUS_M;
-        SmartDashboard.setDefaultNumber("rightDistance: ", RightEncoder.getPosition() / RobotMap.DRIVE_GEAR_RATIO * Circumference;
+        SmartDashboard.setDefaultNumber("rightDistance: ", RightEncoder.getPosition() / RobotMap.DRIVE_GEAR_RATIO * Circumference);
         return RightEncoder.getPosition() / RobotMap.DRIVE_GEAR_RATIO * Circumference;
     }
     public double getLeftMoved(){
