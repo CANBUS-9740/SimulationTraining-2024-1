@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAlternateEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.sim.DriveSim;
@@ -58,7 +59,7 @@ public class DriveSystem extends SubsystemBase {
     }
 
     public double getEncoderR() {
-        return encoderR.getPosition() / RobotMap.DRIVE_GEAR_RATIO * RobotMap.DRIVE_WHEEL_RADIUS_M * 2 * Math.PI;
+        return -encoderR.getPosition() / RobotMap.DRIVE_GEAR_RATIO * RobotMap.DRIVE_WHEEL_RADIUS_M * 2 * Math.PI;
     }
 
     public double getYaw() {
@@ -71,6 +72,12 @@ public class DriveSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        double encoderAverage = (getEncoderL() + getEncoderR()) / 2;
+        SmartDashboard.putNumber("encoderAverage", encoderAverage);
+        SmartDashboard.putNumber("Yaw", getYaw());
+        SmartDashboard.putNumber("outputLeft", sparkLF.get());
+        SmartDashboard.putNumber("outputRight", sparkRF.get());
+
         sim.update();
     }
 }
