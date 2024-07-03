@@ -3,8 +3,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveDistanceCommand;
 import frc.robot.commands.MoveToHeightCommand;
+import frc.robot.commands.RotateByDegreesCommand;
 import frc.robot.commands.StayAtHeightCommand;
+import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ElevatorSystem;
 
 import javax.swing.*;
@@ -13,12 +16,18 @@ public class Robot extends TimedRobot {
     private ElevatorSystem elevatorSystem;
     private MoveToHeightCommand moveToHeightCommand;
     private StayAtHeightCommand stayAtHeightCommand;
+    private DriveSystem driveSystem;
+    private DriveDistanceCommand driveDistanceCommand;
+    private RotateByDegreesCommand rotateByDegreesCommand;
 
     @Override
     public void robotInit() {
         elevatorSystem = new ElevatorSystem();
         moveToHeightCommand = new MoveToHeightCommand(elevatorSystem, 1);
         stayAtHeightCommand = new StayAtHeightCommand(elevatorSystem);
+        driveSystem = new DriveSystem();
+        driveDistanceCommand = new DriveDistanceCommand(driveSystem, 3);
+        rotateByDegreesCommand = new RotateByDegreesCommand(driveSystem, 90);
     }
 
     @Override
@@ -33,7 +42,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-
+        rotateByDegreesCommand.schedule();
     }
 
     @Override
@@ -43,8 +52,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        moveToHeightCommand.andThen
-                (stayAtHeightCommand).schedule();
+        driveDistanceCommand.schedule();
+        //moveToHeightCommand.andThen
+                //(stayAtHeightCommand).schedule();
     }
 
     @Override
