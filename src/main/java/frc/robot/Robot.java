@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Commands.DriveCommand;
+import frc.robot.Commands.DriveTurnToAngle;
 import frc.robot.Commands.ElevatorMoveToTarget;
 import frc.robot.Commands.ElevatorStayAtHeight;
 import frc.robot.subsystems.DriveSystem;
@@ -14,6 +16,10 @@ public class Robot extends TimedRobot {
     private ElevatorSystem elevatorSystem;
     private ElevatorMoveToTarget elevatorMoveToTarget;
     private ElevatorStayAtHeight elevatorStayAtHeight;
+
+    private DriveSystem driveSystem;
+    private DriveCommand driveCommand;
+    private DriveTurnToAngle driveTurnToAngle;
 
     @Override
     public void robotInit() {
@@ -48,6 +54,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        driveCommand = new DriveCommand(driveSystem,3);
+        driveTurnToAngle = new DriveTurnToAngle(driveSystem, 45);
+        driveCommand.andThen(driveTurnToAngle).schedule();
 
     }
 

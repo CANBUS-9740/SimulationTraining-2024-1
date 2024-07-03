@@ -12,7 +12,7 @@ public class RobotMap {
     public static final int DRIVE_FRONT_LEFT = 3;
     public static final int DRIVE_BACK_LEFT = 4;
     public static final int DRIVE_PIGEON = 5;
-    public static final double DRIVE_GEAR_RATIO = 5.71; // 5.71 : 1 (driver/driven)
+    public static final double DRIVE_GEAR_RATIO = 8.32; // 5.71 : 1 (driver/driven)
     public static final double DRIVE_WHEEL_RADIUS_M = Units.inchesToMeters(3);
 
     public static final int TURRET_MOTOR = 7;
