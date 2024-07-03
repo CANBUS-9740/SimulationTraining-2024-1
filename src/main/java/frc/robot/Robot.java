@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
         stayAtHeightCommand = new StayAtHeightCommand(elevatorSystem);
         driveSystem = new DriveSystem();
         driveDistanceCommand = new DriveDistanceCommand(driveSystem, 4);
-        rotateByDegreesCommand = new RotateByDegreesCommand(driveSystem, 90);
+        rotateByDegreesCommand = new RotateByDegreesCommand(driveSystem, 270);
     }
 
     @Override

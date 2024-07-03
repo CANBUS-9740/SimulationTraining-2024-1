@@ -22,7 +22,7 @@ public class RotateByDegreesCommand extends Command {
 
     @Override
     public void execute() {
-        double output = (targetAngle - sub.getYaw()) * 0.1;
+        double output = (targetAngle - sub.getYaw()) * 0.01;
 
         if (targetAngle - sub.getYaw() < 180) {
             sub.move(-output, output);
@@ -33,7 +33,7 @@ public class RotateByDegreesCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return MathUtil.isNear(targetAngle, sub.getYaw(), 0.5);
+        return MathUtil.isNear(targetAngle, sub.getYaw(), 0.1);
     }
 
     @Override
