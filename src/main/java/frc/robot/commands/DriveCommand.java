@@ -10,7 +10,9 @@ public class DriveCommand extends Command {
 
 
     public DriveCommand(DriveSystem driveSystem, double targetPosition){
+        this.driveSystem = driveSystem;
         this.targetPosition = targetPosition;
+
         addRequirements(driveSystem);
     }
     public void initialize() {
@@ -24,10 +26,11 @@ public class DriveCommand extends Command {
     }
 
     public void end(boolean interrupted) {
+        System.out.println("finished DriveCommand");
     }
 
     public boolean isFinished() {
 
-        return driveSystem.getDistance() - targetPosition <= 1;
+        return (driveSystem.getDistance() - targetPosition <= 1) || (driveSystem.getDistance() - targetPosition >= -1);
     }
 }

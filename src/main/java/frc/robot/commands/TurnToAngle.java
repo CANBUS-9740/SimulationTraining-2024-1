@@ -10,6 +10,7 @@ public class TurnToAngle extends Command {
 
 
     public  TurnToAngle(DriveSystem driveSystem, double targetAngle){
+        this.driveSystem = driveSystem;
         this.targetAngle = targetAngle;
         addRequirements(driveSystem);
     }
@@ -26,9 +27,10 @@ public class TurnToAngle extends Command {
     }
 
     public void end(boolean interrupted) {
+        System.out.println("finished TurnToAngle");
     }
 
     public boolean isFinished() {
-        return driveSystem.getAngle() <= targetAngle;
+        return (driveSystem.getAngle() - targetAngle <= 0.5) || (driveSystem.getAngle() - targetAngle >= -0.5);
     }
 }

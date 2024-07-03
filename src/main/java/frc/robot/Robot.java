@@ -26,8 +26,6 @@ public class Robot extends TimedRobot {
         driveSystem = new DriveSystem();
         driveCommand = new DriveCommand(driveSystem,1);
         turnToAngle = new TurnToAngle(driveSystem, 1);
-
-
     }
 
     @Override
@@ -53,13 +51,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        SequentialCommandGroup elevator = new SequentialCommandGroup(
-                moveToHeight,
-                stayAtHeight);
-        SequentialCommandGroup drive = new SequentialCommandGroup(
-                turnToAngle,
-                driveCommand
-        );
+        //SequentialCommandGroup elevator = new SequentialCommandGroup(
+        //        moveToHeight,
+        //        stayAtHeight)
+        new DriveCommand(driveSystem,1).andThen(
+                new TurnToAngle(driveSystem,1)
+        ).schedule();
     }
 
 

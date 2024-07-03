@@ -28,10 +28,13 @@ public class DriveSystem extends SubsystemBase {
         motorFL =  new CANSparkMax(3, CANSparkLowLevel.MotorType.kBrushless);
         motorBL =  new CANSparkMax(4, CANSparkLowLevel.MotorType.kBrushless);
 
+        motorFR.setInverted(true);
+        motorBR.setInverted(true);
+
         encoderL = motorBL.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature ,RobotMap.SRX_ENCODER_PPR);
         encoderR = motorFL.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, RobotMap.SRX_ENCODER_PPR);
         pigeon = new WPI_Pigeon2(5);
-        sim = new DriveSim( motorFR ,motorBR , motorBL, motorFL, pigeon);
+        sim = new DriveSim( motorFL ,motorBL , motorFR, motorBR, pigeon);
 
     }
 
@@ -44,7 +47,6 @@ public class DriveSystem extends SubsystemBase {
     }
 
     public void drive(double speedR, double speedL){
-
         motorFR.set(speedR);
         motorBR.set(speedR);
         motorFL.set(speedL);
