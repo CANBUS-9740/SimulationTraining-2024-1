@@ -25,9 +25,9 @@ public class RotateByDegreesCommand extends Command {
         double output = targetAngle - sub.getYaw() * 0.5;
 
         if (targetAngle - sub.getYaw() < 180) {
-            sub.move(output, -output);
-        } else {
             sub.move(-output, output);
+        } else {
+            sub.move(output, -output);
         }
     }
 

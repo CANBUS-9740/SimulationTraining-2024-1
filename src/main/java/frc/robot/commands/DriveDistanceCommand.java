@@ -22,8 +22,8 @@ public class DriveDistanceCommand extends Command {
 
     @Override
     public void execute() {
-        double outputL = (targetPosition - sub.getEncoderL()) / targetPosition;
-        double outputR = (targetPosition - sub.getEncoderR()) / targetPosition;
+        double outputL = (targetPosition - sub.getEncoderL()) / (2 * targetPosition);
+        double outputR = (targetPosition - sub.getEncoderR()) / (2 * targetPosition);
 
         sub.move(outputL, outputR);
     }
@@ -31,11 +31,13 @@ public class DriveDistanceCommand extends Command {
     @Override
     public boolean isFinished() {
         double encoderAverage = (sub.getEncoderL() + sub.getEncoderR()) / 2;
-        return MathUtil.isNear(targetPosition, encoderAverage, 0.1);
+        System.out.println(encoderAverage);
+        return MathUtil.isNear(targetPosition, encoderAverage, 0.02);
     }
 
     @Override
     public void end(boolean interrupted) {
         sub.stop();
+        System.out.println("stopped");
     }
 }
