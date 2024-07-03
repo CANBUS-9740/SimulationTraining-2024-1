@@ -1,5 +1,7 @@
 package frc.robot.sim;
 
+import frc.robot.SimSettings;
+
 public class MotorShaft {
 
     private final int encoderPpr;

@@ -4,7 +4,9 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.DIOSim;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -65,12 +67,9 @@ public class TurretSim {
     }
 
     public void update() {
-        double motorOutput = motor.updateOutput();
+        double batteryVoltage = RobotController.getBatteryVoltage();
+        double motorOutput = motor.updateOutput(batteryVoltage);
         sim.setInput(motorOutput);
-
-        if (motorOutput == 0) {
-            sim.setState(VecBuilder.fill(sim.getPosition(), 0));
-        }
 
         sim.update(0.02);
 

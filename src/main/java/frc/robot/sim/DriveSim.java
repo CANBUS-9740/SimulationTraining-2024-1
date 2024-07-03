@@ -1,6 +1,5 @@
 package frc.robot.sim;
 
-import com.ctre.phoenix.sensors.BasePigeonSimCollection;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.MatBuilder;
@@ -9,6 +8,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +23,6 @@ public class DriveSim {
     private final SparkMaxSim motorRightFront;
     private final SparkMaxSim motorRightBack;
     private final WPI_Pigeon2 pigeon;
-    private final BasePigeonSimCollection pigeonSim;
 
     private final DifferentialDrivetrainSim sim;
     private final Field2d field;
@@ -65,7 +64,6 @@ public class DriveSim {
                 motorShaft,
                 true);
         this.pigeon = pigeon;
-        pigeonSim = pigeon.getSimCollection();
 
         sim = new DifferentialDrivetrainSim(
                 DCMotor.getCIM(SimSettings.DRIVE_SIDE_MOTOR_COUNT),
@@ -83,8 +81,9 @@ public class DriveSim {
     }
 
     public void update() {
-        double leftOutput = motorLeftFront.updateOutput() + motorLeftBack.updateOutput();
-        double rightOutput = motorRightFront.updateOutput() + motorRightBack.updateOutput();
+        double batteryVoltage = RobotController.getBatteryVoltage();
+        double leftOutput = motorLeftFront.updateOutput(batteryVoltage) + motorLeftBack.updateOutput(batteryVoltage);
+        double rightOutput = motorRightFront.updateOutput(batteryVoltage) + motorRightBack.updateOutput(batteryVoltage);
 
         sim.setInputs(leftOutput, rightOutput);
 
@@ -101,7 +100,7 @@ public class DriveSim {
         motorRightBack.updateOdometry(rightPosition, rightVelocity);
 
         double yaw = sim.getHeading().getDegrees();
-        pigeonSim.setRawHeading(yaw);
+        pigeon.setYaw(yaw);
         entryYaw.setDouble(yaw);
 
         field.setRobotPose(sim.getPose());

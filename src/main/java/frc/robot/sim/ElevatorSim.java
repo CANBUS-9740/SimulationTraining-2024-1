@@ -5,6 +5,7 @@ import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.DIOSim;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -26,7 +27,7 @@ public class ElevatorSim {
 
     public ElevatorSim(CANSparkMax motor) {
         NetworkTable rootTable = NetworkTableInstance.getDefault().getTable("SimDebug").getSubTable("Elevator");
-        MotorShaft motorShaft = new MotorShaft(RobotMap.NEO_ENCODER_PPR, SimSettings.ELEVATOR_MOTOR_TO_ELEVATOR_GEAR_RATIO, 2 * SimSettings.ELEVATOR_DRUM_RADIUS_M * Math.PI);
+        MotorShaft motorShaft = new MotorShaft(RobotMap.NEO_ENCODER_PPR, SimSettings.ELEVATOR_MOTOR_TO_ELEVATOR_GEAR_RATIO, SimSettings.ELEVATOR_DRUM_RADIUS_M);
 
         this.motor = new SparkMaxSim(
                 rootTable,
@@ -64,7 +65,8 @@ public class ElevatorSim {
     }
 
     public void update() {
-        double motorOutput = motor.updateOutput();
+        double batteryVoltage = RobotController.getBatteryVoltage();
+        double motorOutput = motor.updateOutput(batteryVoltage);
         sim.setInput(motorOutput);
 
         sim.update(0.02);
