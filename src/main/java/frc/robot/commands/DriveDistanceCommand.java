@@ -22,10 +22,10 @@ public class DriveDistanceCommand extends Command {
 
     @Override
     public void execute() {
-        double outputL = (targetPosition - sub.getEncoderL()) / (2 * targetPosition);
-        double outputR = (targetPosition - sub.getEncoderR()) / (2 * targetPosition);
+        double encoderAverage = (sub.getEncoderL() + sub.getEncoderR()) / 2;
+        double output = (targetPosition - encoderAverage) / (2 * targetPosition);
 
-        sub.move(outputL, outputR);
+        sub.move(output, output);
     }
 
     @Override
