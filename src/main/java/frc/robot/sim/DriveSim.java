@@ -2,6 +2,7 @@ package frc.robot.sim;
 
 import com.ctre.phoenix.sensors.BasePigeonSimCollection;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.MatBuilder;
 import edu.wpi.first.math.Nat;
@@ -80,6 +81,9 @@ public class DriveSim {
 
         field = new Field2d();
         SmartDashboard.putData("Drive-Field2d", field);
+    }
+
+    public DriveSim(CANSparkMax motorFR, CANSparkMax motorBR, CANSparkMax motorBL, CANSparkMax motorFL, Pigeon2 pigeon) {
     }
 
     public void update() {
