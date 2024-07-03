@@ -35,4 +35,5 @@ public class RobotMap {
     public static final double ARM_GEAR_RATIO = 12.0 / 1.0; // 8.41 : 5 (driver/driven)
     public static final double ARM_MIN_ANGLE = 0;
     public static final double ARM_MAX_ANGLE = 130;
+    public static final double ARM_BOTTOM_FEEDFORWARD_POWER = 0.209818;
 }
