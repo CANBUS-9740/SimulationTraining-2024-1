@@ -54,8 +54,8 @@ public class ArmSim {
                 SimSettings.ARM_MOTOR_TO_ARM_GEAR_RATIO,
                 SimSettings.ARM_MOMENT_OF_INERTIA,
                 SimSettings.ARM_LENGTH,
-                SimSettings.ARM_MIN_ANGLE,
-                SimSettings.ARM_MAX_ANGLE,
+                SimSettings.ARM_BOTTOM_MIN_ANGLE,
+                SimSettings.ARM_BOTTOM_MAX_ANGLE,
                 SimSettings.ARM_SIMULATE_GRAVITY,
                 0,
                 VecBuilder.fill(0.001)
@@ -66,8 +66,8 @@ public class ArmSim {
                 SimSettings.ARM_MOTOR_TO_ARM_GEAR_RATIO,
                 SimSettings.ARM_MOMENT_OF_INERTIA,
                 SimSettings.ARM_LENGTH,
-                SimSettings.ARM_MIN_ANGLE,
-                SimSettings.ARM_MAX_ANGLE,
+                SimSettings.ARM_TOP_MIN_ANGLE,
+                SimSettings.ARM_TOP_MAX_ANGLE,
                 SimSettings.ARM_SIMULATE_GRAVITY,
                 0,
                 VecBuilder.fill(0.001)
