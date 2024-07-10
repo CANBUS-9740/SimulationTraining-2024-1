@@ -3,10 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Commands.DriveCommand;
-import frc.robot.Commands.DriveTurnToAngle;
-import frc.robot.Commands.ElevatorMoveToTarget;
-import frc.robot.Commands.ElevatorStayAtHeight;
+import frc.robot.Commands.*;
+import frc.robot.subsystems.ArmSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ElevatorSystem;
 import frc.robot.subsystems.TurretSystem;
@@ -21,16 +19,22 @@ public class Robot extends TimedRobot {
     private DriveCommand driveCommand;
     private DriveTurnToAngle driveTurnToAngle;
 
+
+    private ArmSystem armSystem;
+    private ArmCommand armCommand;
+
     @Override
     public void robotInit() {
-        elevatorSystem = new ElevatorSystem();
+//        elevatorSystem = new ElevatorSystem();
+//
+//        driveSystem = new DriveSystem();
+//
+//        SequentialCommandGroup elevator = new SequentialCommandGroup(
+//                elevatorMoveToTarget = new ElevatorMoveToTarget(elevatorSystem, 1.5),
+//                elevatorStayAtHeight = new ElevatorStayAtHeight(elevatorSystem)
+//        );
 
-        driveSystem = new DriveSystem();
-
-        SequentialCommandGroup elevator = new SequentialCommandGroup(
-                elevatorMoveToTarget = new ElevatorMoveToTarget(elevatorSystem, 1.5),
-                elevatorStayAtHeight = new ElevatorStayAtHeight(elevatorSystem)
-        );
+        armSystem = new ArmSystem();
 
     }
 
@@ -56,9 +60,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        driveCommand = new DriveCommand(driveSystem,3);
-        driveTurnToAngle = new DriveTurnToAngle(driveSystem, 45);
-        driveCommand.andThen(driveTurnToAngle).schedule();
+        armCommand = new ArmCommand(armSystem, 30, 120);
+        armCommand.schedule();
+
+//        driveCommand = new DriveCommand(driveSystem,3);
+//        driveTurnToAngle = new DriveTurnToAngle(driveSystem, 45);
+//        driveCommand.andThen(driveTurnToAngle).schedule();
 
     }
 
