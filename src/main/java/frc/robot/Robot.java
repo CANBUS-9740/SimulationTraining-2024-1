@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 //        driveDistanceCommand = new DriveDistanceCommand(driveSystem, 4);
 //        rotateByDegreesCommand = new RotateByDegreesCommand(driveSystem, 270);
         armSystem = new ArmSystem();
-        armCommand = new ArmCommand(armSystem, 45, 10);
+        armCommand = new ArmCommand(armSystem, 45, 110);
     }
 
     @Override
