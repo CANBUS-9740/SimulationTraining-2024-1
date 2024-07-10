@@ -18,8 +18,8 @@ public class ArmCommand extends Command {
         this.bottomTarget = bottomTarget;
         this.topTarget = topTarget;
 
-        PIDBottom = new PIDController(0, 0, 0);
-        PIDTop = new PIDController(0, 0, 0);
+        PIDBottom = new PIDController(0.05, 0.001, 0.01);
+        PIDTop = new PIDController(0.3, 0.005, 0.015);
 
         addRequirements(sub);
     }

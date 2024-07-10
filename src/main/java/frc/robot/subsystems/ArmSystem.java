@@ -36,7 +36,7 @@ public class ArmSystem extends SubsystemBase {
         if ((topSpeed < 0 && getEncoderTop() <= RobotMap.ARM_TOP_MIN_ANGLE) || (topSpeed > 0 && getEncoderTop() >= RobotMap.ARM_TOP_MAX_ANGLE)) {
             motorTop.stopMotor();
         } else {
-            motorTop.set(topSpeed + 0.3);
+            motorTop.set(topSpeed);
         }
         if ((bottomSpeed < 0 && getEncoderBottom() <= RobotMap.ARM_BOTTOM_MIN_ANGLE) || (bottomSpeed > 0 && getEncoderBottom() >= RobotMap.ARM_BOTTOM_MAX_ANGLE)) {
             motorBottom.stopMotor();
