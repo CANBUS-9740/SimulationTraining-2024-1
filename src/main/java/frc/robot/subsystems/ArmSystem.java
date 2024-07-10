@@ -1,12 +1,20 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSystem extends SubsystemBase {
-    private CANSparkMax motor;
 
-    public ArmSystem(){
-        motor = new CANSparkMax()
+    // uncomment this
+    // private final ArmSim sim;
+
+    public ArmSystem() {
+        // initialize system components and uncomment this, passing these components to the sim
+        // sim = new ArmSim(motorBottom, motorTop);
+    }
+
+    @Override
+    public void periodic() {
+        // uncomment this
+        // sim.update();
     }
 }
