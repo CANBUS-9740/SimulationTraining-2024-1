@@ -28,4 +28,8 @@ public class RobotMap {
     public static final double ELEVATOR_DRUM_RADIUS_M = 0.5;
     public static final double ELEVATOR_MIN_HEIGHT = 0;
     public static final double ELEVATOR_MAX_HEIGHT = 2;
+
+    public static final int ARM_ID = 8;
+    public static final double ARM_GEAR_RATIO = 100;
+    public static final int ABS_ARM_ENCODER_CHANNEL = 0;
 }

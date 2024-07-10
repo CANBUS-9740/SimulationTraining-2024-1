@@ -7,6 +7,7 @@ import com.revrobotics.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.sim.DriveSim;
 
 public class DuoWheelDrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax RightTopMotor;
@@ -21,8 +22,7 @@ public class DuoWheelDrivetrainSubsystem extends SubsystemBase {
 
     private WPI_Pigeon2 gyro;
 
-
-
+    private final DriveSim sim;
 
     public DuoWheelDrivetrainSubsystem() {
         RightTopMotor = new CANSparkMax(1, CANSparkLowLevel.MotorType.kBrushless);
@@ -41,6 +41,8 @@ public class DuoWheelDrivetrainSubsystem extends SubsystemBase {
 
         RightMotor.setInverted(true);
         RightEncoder.setInverted(true);
+        sim = new DriveSim(LeftTopMotor, LeftBottomMotor, RightTopMotor, RightBottomMotor, gyro);
+
     }
     public void Power(double leftPow, double rightPow){
         SmartDashboard.setDefaultNumber("rightPow: ", rightPow);
@@ -67,6 +69,9 @@ public class DuoWheelDrivetrainSubsystem extends SubsystemBase {
     public double getSpin(){
         SmartDashboard.setDefaultNumber("dgree: ", gyro.getYaw());
         return gyro.getYaw();
+    }
+    public void periodic() {
+        sim.update();
     }
 }
 
