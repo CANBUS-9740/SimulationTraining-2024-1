@@ -2,10 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.MoveToHeight;
-import frc.robot.commands.StayAtHeight;
-import frc.robot.commands.TurnToAngle;
+import frc.robot.commands.*;
+import frc.robot.subsystems.ArmSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ElevatorSystem;
 import frc.robot.subsystems.TurretSystem;
@@ -17,6 +15,8 @@ public class Robot extends TimedRobot {
     private DriveSystem driveSystem;
     private DriveCommand driveCommand;
     private TurnToAngle turnToAngle;
+    private ArmSystem armSystem;
+    private ArmCommand armCommand;
 
     @Override
     public void robotInit() {
@@ -26,6 +26,8 @@ public class Robot extends TimedRobot {
         driveSystem = new DriveSystem();
         driveCommand = new DriveCommand(driveSystem,1);
         turnToAngle = new TurnToAngle(driveSystem, 1);
+        armSystem = new ArmSystem(-45,45);
+        armCommand = new ArmCommand(armSystem,45,-45);
     }
 
     @Override
@@ -54,9 +56,11 @@ public class Robot extends TimedRobot {
         //SequentialCommandGroup elevator = new SequentialCommandGroup(
         //        moveToHeight,
         //        stayAtHeight)
-        new DriveCommand(driveSystem,1).andThen(
-                new TurnToAngle(driveSystem,1)
-        ).schedule();
+        //new DriveCommand(driveSystem,1).andThen(
+        //        new TurnToAngle(driveSystem,1)
+        //).schedule();
+        new ArmCommand(armSystem,45,-45).schedule();
+
     }
 
 

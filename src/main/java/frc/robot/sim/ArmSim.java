@@ -1,7 +1,9 @@
 package frc.robot.sim;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -79,6 +81,12 @@ public class ArmSim {
         mechanismRootTop = mechanism.getRoot("ArmTop", MECHANISM_BASE_POS, 0);
         mechanismLigamentTop = mechanismRootTop.append(new MechanismLigament2d("ArmTop", MECHANISM_ARM_LENGTH, 0, 10, new Color8Bit(235, 137, 52)));
         SmartDashboard.putData("Arm-Mechanism", mechanism);
+    }
+
+    public ArmSim(CANSparkMax motorBottom, CANSparkMax motorTop, RelativeEncoder topEncoder, RelativeEncoder bottomEncoder) {
+    }
+
+    public ArmSim(CANSparkMax motorBottom, CANSparkMax motorTop, RelativeEncoder topEncoder, RelativeEncoder bottomEncoder, PIDController pidControllerTop, PIDController pidControllerBottom) {
     }
 
     public void update() {
