@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.ArmSystem;
@@ -35,6 +36,9 @@ public class ArmCommand extends Command {
         double bottomOutput = PIDBottom.calculate(sub.getEncoderBottom(), bottomTarget);
 
         sub.moveToTarget(bottomOutput, topOutput);
+
+        SmartDashboard.putData("PIDTop", PIDTop);
+        SmartDashboard.putData("PIDBottom", PIDBottom);
     }
 
     @Override
@@ -46,4 +50,6 @@ public class ArmCommand extends Command {
     public void end(boolean interrupted) {
         sub.stop();
     }
+
+
 }
