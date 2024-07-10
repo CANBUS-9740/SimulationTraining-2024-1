@@ -29,7 +29,7 @@ public class DriveCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return driveSystem.getDistancePassed() > targetDistanceDrive - 0.5 && driveSystem.getDistancePassed() < targetDistanceDrive + 0.5 ;
+        return (driveSystem.getDistancePassed() > (targetDistanceDrive - 0.5)) && (driveSystem.getDistancePassed() < (targetDistanceDrive + 0.5)) ;
     }
 
     @Override

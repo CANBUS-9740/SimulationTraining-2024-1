@@ -25,6 +25,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         elevatorSystem = new ElevatorSystem();
 
+        driveSystem = new DriveSystem();
+
         SequentialCommandGroup elevator = new SequentialCommandGroup(
                 elevatorMoveToTarget = new ElevatorMoveToTarget(elevatorSystem, 1.5),
                 elevatorStayAtHeight = new ElevatorStayAtHeight(elevatorSystem)

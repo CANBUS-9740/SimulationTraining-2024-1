@@ -59,12 +59,12 @@ public class DriveSystem extends SubsystemBase {
     }
 
     public double getAngle(){
-        return pigeon.getYaw();
+        return pigeon.getYaw() % 360;
     }
 
     public double getDistancePassed(){
         double leftDistance = encoderLeft.getPosition() / RobotMap.DRIVE_GEAR_RATIO * (RobotMap.DRIVE_WHEEL_RADIUS_M * 2 * Math.PI);
-        double rightDistance = encoderRight.getPosition() / RobotMap.DRIVE_GEAR_RATIO * (RobotMap.DRIVE_WHEEL_RADIUS_M * 2 * Math.PI);
+        double rightDistance = (-encoderRight.getPosition()) / RobotMap.DRIVE_GEAR_RATIO * (RobotMap.DRIVE_WHEEL_RADIUS_M * 2 * Math.PI);
 
         return (leftDistance + rightDistance) / 2;
     }

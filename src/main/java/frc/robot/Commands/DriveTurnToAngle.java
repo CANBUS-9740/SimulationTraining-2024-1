@@ -32,7 +32,7 @@ public class DriveTurnToAngle extends Command {
 
     @Override
     public boolean isFinished() {
-        return targetAngle - 0.5 < driveSystem.getAngle() && driveSystem.getAngle() < targetAngle + 0.5;
+        return (targetAngle - 0.5) < (driveSystem.getAngle()) && (driveSystem.getAngle()) < (targetAngle + 0.5);
     }
 
     @Override
