@@ -28,5 +28,13 @@ public class RobotMap {
     public static final double ELEVATOR_DRUM_RADIUS_M = 0.5;
     public static final double ELEVATOR_MIN_HEIGHT = 0;
     public static final double ELEVATOR_MAX_HEIGHT = 2;
+
+    public static final int ARM_MOTOR_BOTTOM = 10;
+    public static final int ARM_MOTOR_TOP = 11;
+    public static final double ARM_GEAR_RATIO = 12.0 / 1.0; // 8.41 : 5 (driver/driven)
+    public static final double ARM_BOTTOM_MIN_ANGLE = 0;
+    public static final double ARM_BOTTOM_MAX_ANGLE = 180;
+    public static final double ARM_TOP_MIN_ANGLE = -90;
+    public static final double ARM_TOP_MAX_ANGLE = 90;
     public static final double ELEVATOR_STATIC_POW = 0.35;
 }
